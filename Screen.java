@@ -6,7 +6,8 @@ import javax.swing.JButton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.Font;
-
+import java.util.ArrayList;
+import java.util.List;
 
 public class Screen extends JPanel implements ActionListener {
 	
@@ -16,15 +17,34 @@ public class Screen extends JPanel implements ActionListener {
 	private JButton roll, play;
 	private Boolean start;
 	private Font myFont = new Font("Serif", Font.BOLD, 45);
+	Pieces[] playerList = new Pieces[4];
 
 
     // Constructor
 	public Screen() {
+		
 		for (int i = 0; i < grid.length; i++) {
 			for (int j = 0; j < grid.length; j++) {
-				grid[i][j] = new Square(50 * j + 100, 50 * i + 100);
+				grid[i][j] = new Square(65 * j + 100, 65 * i + 100);
+				
 			}
 		}
+		int count = 1;
+		for (int i = grid.length-1;  i >= 0; i--) {
+			if (i%2 == 1) {
+				for (int j = 0; j < grid.length; j++) {
+					grid[i][j].setCount(count);
+					count++;
+				}
+			}
+			else {
+				for (int j = grid.length-1; i >=0; i--) {
+					grid[i][j].setCount(count);
+					count++;
+				}
+			}
+		}
+
 		start = true;
 		roll = new JButton("ROLL DICE");
 		play = new JButton("START GAME");
@@ -36,6 +56,13 @@ public class Screen extends JPanel implements ActionListener {
 		roll.setVisible(false);
 		roll.addActionListener(this);
 		play.addActionListener(this);
+
+		playerList[0] = new Pieces(600, 20, Color.black);
+		playerList[1] = new Pieces(600, 60, Color.red);
+		playerList[2] = new Pieces(600, 100, Color.blue);
+		playerList[3] = new Pieces(600, 140, Color.green);
+		
+
 		
     }
 
@@ -52,7 +79,9 @@ public class Screen extends JPanel implements ActionListener {
 		super.paintComponent(g);
 		
 		Color black = new Color(255,255,255);
-		g.drawString("You rolled a " + dice, 940, 250);
+		if (dice > 0) {
+			g.drawString("You rolled a " + dice, 940, 250);
+		}
 		g.drawString("Current Player: " + (turn + 1), 800, 250);
 		Color white = new Color(0,0,0);
 		if (start) {
@@ -71,6 +100,21 @@ public class Screen extends JPanel implements ActionListener {
 		for (Square[] r : grid){
 			for (Square s : r){
 				s.draw(g);
+			}
+		}
+		int count = 1;
+		for (int i = grid.length-1; i>=0; i--) {
+			if (i % 2 == 1) {
+				for (int j = 0; j < grid[0].length; j++) {
+					g.drawString(count + "",65 * j + 125, 65 * i + 135);
+					count++;
+				}
+			}
+			else {
+				for (int j = grid[i].length-1; j>=0; j--) {
+					g.drawString(count + "",65 * j + 125, 65 * i + 135);
+					count++;
+				}
 			}
 		}
 

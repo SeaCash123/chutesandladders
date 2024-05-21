@@ -3,7 +3,7 @@ import java.awt.Graphics;
 
 public class Square {
     private String type;
-    int x, y;
+    int x, y, count;
 
     public Square(int x, int y) {
         type = "";
@@ -11,7 +11,9 @@ public class Square {
         this.y = y;
         
     }
-
+    public void setCount(int count) {
+        this.count = count;  
+    }
     public void setType(String type) {
         this.type = type;
     }
@@ -22,6 +24,6 @@ public class Square {
 
     public void draw(Graphics g) {
         g.setColor(new Color(0,0,0));
-        g.drawRect(x,y,150,150);
+        g.drawRect(x,y,65,65);
     }
 }
