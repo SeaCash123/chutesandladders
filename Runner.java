@@ -15,6 +15,7 @@ public class Runner {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.pack();
         frame.setVisible(true);
+        canvas.animate();
 
         // You probably will add more code (Scanner, etc.) depending on the assignment.
 

@@ -15,9 +15,11 @@ public class Screen extends JPanel implements ActionListener {
     Square[][] grid = new Square[10][10];
 	private int turn, dice;
 	private JButton roll, play;
-	private Boolean start;
+	private Boolean start, pieceMoving;
 	private Font myFont = new Font("Serif", Font.BOLD, 45);
 	Pieces[] playerList = new Pieces[4];
+	private int newRow, newCol, pastRow, pastCol;
+	
 
 
     // Constructor
@@ -46,6 +48,7 @@ public class Screen extends JPanel implements ActionListener {
 		}
 
 		start = true;
+		pieceMoving = false;
 		roll = new JButton("ROLL DICE");
 		play = new JButton("START GAME");
 		setLayout(null);
@@ -57,10 +60,10 @@ public class Screen extends JPanel implements ActionListener {
 		roll.addActionListener(this);
 		play.addActionListener(this);
 
-		playerList[3] = new Pieces(50, 580, Color.black);
-		playerList[2] = new Pieces(50, 620, Color.red);
-		playerList[1] = new Pieces(50, 660, Color.blue);
-		playerList[0] = new Pieces(50, 700, Color.green);
+		playerList[3] = new Pieces(50, 65 * 9+115, Color.orange);
+		playerList[2] = new Pieces(50, 65*9+115, Color.red);
+		playerList[1] = new Pieces(50, 65*9+115, Color.blue);
+		playerList[0] = new Pieces(50, 65*9+115, Color.green);
 		
 
 		
@@ -142,21 +145,27 @@ public class Screen extends JPanel implements ActionListener {
 		
 		playerList[turn].changePos(newPos);
 
-		if (newPos >= 100) {
-			playerList[turn].changeX(115);
-			playerList[turn].changeY(115);
-		}
-		else {
-			for (int i = 0; i < grid.length; i++) {
-				for (int j = 0; j < grid[i].length; j++) {
-					if (grid[i][j].getCount() == newPos) {
-						playerList[turn].changeX(65 * j + 115);
-						playerList[turn].changeY(65 * i + 115);
-						break;
-					}
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (grid[i][j].getCount() == pastPos) {
+					pastRow = i;
+					pastCol = j;
+					break;
 				}
 			}
 		}
+		for (int i = 0; i < grid.length; i++) {
+			for (int j = 0; j < grid[i].length; j++) {
+				if (grid[i][j].getCount() == newPos) {
+					playerList[turn].changeX(65 * j +115);
+					playerList[turn].changeY(65 * i + 115);
+					break;
+				}
+			}
+		}
+
+
+
 	}
 	private int rollDice(){
 		int num = (int)(Math.random()*6 + 1);
@@ -187,6 +196,23 @@ public class Screen extends JPanel implements ActionListener {
 
 	}
 
+	public void animate() {
+		while(true){
+            //wait for .01 second
+            try {
+                Thread.sleep(10);
+            } catch(InterruptedException ex) {
+                Thread.currentThread().interrupt();
+            }
+            
+            // You add code here. moveRectangle is called continously to simulate movement
+            
+            /* Repaint the graphics drawn. You MUST have this in your code
+              because each time an object is moved, the panel needs to 
+              be updated. */
+            repaint();
+        }
+	}
 
 }
 

@@ -5,12 +5,14 @@ public class Pieces {
 
     private int x, y, position;
     private Color c;
+    private Boolean change;
 
     public Pieces(int x, int y, Color c){
         this.x = x;
         this.y = y;
         this.c = c;
         position = 0;
+        change = true;
     }
 
     public void draw(Graphics g){
@@ -42,5 +44,11 @@ public class Pieces {
     public int getPos() {
         return position;
     }
+
+   
+     
+        
+        
+    
 
 }
