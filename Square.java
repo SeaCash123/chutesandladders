@@ -14,16 +14,15 @@ public class Square {
     public void setCount(int count) {
         this.count = count;  
     }
+    public int getCount() {
+        return count;
+    }
     public void setType(String type) {
         this.type = type;
     }
 
     public String getType() {
         return type;
-    }
-
-    public int getCount() {
-        return count;
     }
 
     public void draw(Graphics g) {
