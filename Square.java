@@ -22,6 +22,10 @@ public class Square {
         return type;
     }
 
+    public int getCount() {
+        return count;
+    }
+
     public void draw(Graphics g) {
         g.setColor(new Color(0,0,0));
         g.drawRect(x,y,65,65);

@@ -38,7 +38,7 @@ public class Screen extends JPanel implements ActionListener {
 				}
 			}
 			else {
-				for (int j = grid.length-1; i >=0; i--) {
+				for (int j = grid.length-1; j >=0; j--) {
 					grid[i][j].setCount(count);
 					count++;
 				}
@@ -57,10 +57,10 @@ public class Screen extends JPanel implements ActionListener {
 		roll.addActionListener(this);
 		play.addActionListener(this);
 
-		playerList[0] = new Pieces(600, 20, Color.black);
-		playerList[1] = new Pieces(600, 60, Color.red);
-		playerList[2] = new Pieces(600, 100, Color.blue);
-		playerList[3] = new Pieces(600, 140, Color.green);
+		playerList[3] = new Pieces(50, 580, Color.black);
+		playerList[2] = new Pieces(50, 620, Color.red);
+		playerList[1] = new Pieces(50, 660, Color.blue);
+		playerList[0] = new Pieces(50, 700, Color.green);
 		
 
 		
@@ -102,6 +102,12 @@ public class Screen extends JPanel implements ActionListener {
 				s.draw(g);
 			}
 		}
+
+		for (Pieces each : playerList) {
+			each.draw(g);
+		}
+
+		g.setColor(Color.black);
 		int count = 1;
 		for (int i = grid.length-1; i>=0; i--) {
 			if (i % 2 == 1) {
@@ -130,12 +136,36 @@ public class Screen extends JPanel implements ActionListener {
 
 	}
 
+	private void move(int dice) {
+		int pastPos = playerList[turn].getPos();
+		int newPos = pastPos + dice;
+		
+		playerList[turn].changePos(newPos);
+
+		if (newPos >= 100) {
+			playerList[turn].changeX(115);
+			playerList[turn].changeY(115);
+		}
+		else {
+			for (int i = 0; i < grid.length; i++) {
+				for (int j = 0; j < grid[i].length; j++) {
+					if (grid[i][j].getCount() == newPos) {
+						playerList[turn].changeX(65 * j + 115);
+						playerList[turn].changeY(65 * i + 115);
+						break;
+					}
+				}
+			}
+		}
+	}
 	private int rollDice(){
+		int num = (int)(Math.random()*6 + 1);
+		move(num);
 		turn++;
 		if (turn==4){
 			turn = 0;
 		}
-		return (int)(Math.random()*6 + 1);
+		return num;
 	}
 
 
@@ -156,5 +186,7 @@ public class Screen extends JPanel implements ActionListener {
 		repaint();
 
 	}
+
+
 }
 

@@ -3,18 +3,19 @@ import java.awt.Graphics;
 
 public class Pieces {
 
-    private int x, y;
+    private int x, y, position;
     private Color c;
 
     public Pieces(int x, int y, Color c){
         this.x = x;
         this.y = y;
         this.c = c;
+        position = 0;
     }
 
     public void draw(Graphics g){
         g.setColor(c);
-        g.fillOval(x,y, 10, 10);
+        g.fillOval(x,y, 30, 30);
     }
 
 
@@ -32,6 +33,14 @@ public class Pieces {
 
     public int getY() {
         return y;
+    }
+
+    public void changePos(int x) {
+        position = x;
+    }
+
+    public int getPos() {
+        return position;
     }
 
 }
