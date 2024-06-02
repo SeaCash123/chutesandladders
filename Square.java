@@ -1,32 +1,22 @@
 import java.awt.Color;
 import java.awt.Graphics;
 
+//Squares for the board grid
 public class Square {
-    private String type;
     int x, y, count;
 
+    //constructor
     public Square(int x, int y) {
-        type = "";
         this.x = x;
         this.y = y;
         
     }
+    //sets square num
     public void setCount(int count) {
         this.count = count;  
     }
+    //returns square num
     public int getCount() {
         return count;
-    }
-    public void setType(String type) {
-        this.type = type;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void draw(Graphics g) {
-        g.setColor(new Color(0,0,0));
-        g.drawRect(x,y,65,65);
     }
 }
