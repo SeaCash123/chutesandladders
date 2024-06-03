@@ -19,9 +19,8 @@ public class Screen extends JPanel implements ActionListener {
     private int dice;
     private JButton roll, play, restart;
     private Boolean start;
-    private Font myFont = new Font("Serif", Font.BOLD, 45);
-    private Font smallFont = new Font("Serif", Font.BOLD, 18);
-    Pieces[] playerList = new Pieces[4];
+    private Font myFont ;
+    private Font smallFont;
 	private Game game;
 	private int displayTurn;
     private Sound sound;
@@ -34,6 +33,9 @@ public class Screen extends JPanel implements ActionListener {
         sound = new Sound();
 
         //sets up buttons
+        myFont = new Font("Serif", Font.BOLD, 45);
+        smallFont = new Font("Serif", Font.BOLD, 18);
+        
         start = true;
         roll = new JButton("ROLL DICE");
         play = new JButton("START GAME");

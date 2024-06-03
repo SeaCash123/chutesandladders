@@ -7,7 +7,6 @@ public class Game {
     //Instance variables
     private Square[][] grid;
     private int turn, dice;
-    private Font myFont;
     private Pieces[] playerList;
     private int newRow, newCol;
     private boolean isAnimating;
@@ -49,7 +48,6 @@ public class Game {
         //defining some instance variables
         touching = false;
         end = false;
-        myFont = new Font("Serif", Font.BOLD, 45);
         playerList = new Pieces[4];
         isAnimating = false;
 
